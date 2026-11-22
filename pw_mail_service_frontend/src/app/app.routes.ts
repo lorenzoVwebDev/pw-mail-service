@@ -3,6 +3,8 @@ import { Home } from './home/home';
 import { SignIn } from './common/sign-in/sign-in';
 import { SignUp } from './common/sign-up/sign-up';
 import { MailRegistrationSuccess } from './common/mail-registration-success/mail-registration-success';
+import { ForgotPassword } from './common/forgot-password/forgot-password';
+import { ServerError } from './common/server-error/server-error';
 
 export const routes: Routes = [{
   path: "",
@@ -16,4 +18,10 @@ export const routes: Routes = [{
 }, {
   path: "mailconfirmation",
   component: MailRegistrationSuccess
+}, {
+  path: "forgot-password",
+  component: ForgotPassword
+}, {
+  path: "500",
+  component: ServerError
 }];

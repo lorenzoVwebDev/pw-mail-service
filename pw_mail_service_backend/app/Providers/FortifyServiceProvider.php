@@ -8,6 +8,7 @@ use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -63,6 +64,12 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::verifyEmailView(function() {
             return view("authentication.verify-email");
+        });
+
+        Fortify::resetPasswordView(function(Request $request) {
+            $token = $request->segment(2);
+            $email = $request->query("email");
+            return redirect()->away("http://localhost:4200/?token=".$token."&email=".$email);
         });
 
     }

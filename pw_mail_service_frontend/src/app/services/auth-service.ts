@@ -47,4 +47,20 @@ export class AuthService {
       }
     )))
   }
+
+  forgotPassword(email: string) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+
+    const body = {
+      email
+    }
+
+    return this.http.get("http://localhost:8000/csrf-cookie").pipe(switchMap(() => this.http.post("http://localhost:8000/forgot-password", body, {
+      observe: "response",
+      headers,
+      withCredentials: true
+    })))
+  }
 }
