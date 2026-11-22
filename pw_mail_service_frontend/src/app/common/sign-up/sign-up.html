@@ -1,0 +1,36 @@
+
+<main class="sign-up-page">
+  <section class="sign-up-card" aria-labelledby="sign-up-title">
+    <a class="brand" href="/" aria-label="Postwell home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span>postwell</span>
+    </a>
+    @if (signUpOk()) {
+      <h1>Thank You For Subscribing Our Channel, Check Your Email To Verify Your Account!</h1>
+    } @else if (alreadyRegister()) {
+      <h1>Email Or Username alread exist</h1>
+    } @else {
+      <div class="sign-up-heading">
+        <p class="eyebrow">A calmer inbox starts here</p>
+        <h1 id="sign-up-title">Create your account</h1>
+        <p>Join Postwell and make room for the mail that matters.</p>
+      </div>
+
+      <form [formGroup]="signUpForm" (submit)="signUp()">
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name">
+        <label for="email">Email</label>
+        <input type="text" id="email" formControlName="email">
+        <label for="password">Password</label>
+        <input type="text" id="password" formControlName="password">
+        <label for="password_confirmation">Confirm Password</label>
+        <input type="text" id="email" formControlName="password_confirmation">
+        <button type="submit" [submitdisabledDirective]="signUpForm.valid">Subscribe</button>
+      </form>
+    }
+
+    <p class="sign-in-prompt">Already have an account? <a href="/login">Sign in</a></p>
+  </section>
+
+  <p class="page-note"><span aria-hidden="true">✦</span> A little more calm for your inbox.</p>
+</main>

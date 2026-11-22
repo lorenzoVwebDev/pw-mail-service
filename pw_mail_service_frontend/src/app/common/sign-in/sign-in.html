@@ -1,0 +1,38 @@
+<main class="sign-in-page">
+  <section class="sign-in-card" aria-labelledby="sign-in-title">
+    <a class="brand" href="/" aria-label="Postwell home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span>postwell</span>
+    </a>
+
+    <div class="sign-in-heading">
+      <p class="eyebrow">Welcome back</p>
+      <h1 id="sign-in-title">Sign in to your account</h1>
+      <p>Pick up right where you left off.</p>
+    </div>
+
+    <form [formGroup]="signInFormGroup" (submit)="signIn()" novalidate>
+      <div class="form-field">
+        <label for="email">Email address</label>
+       <input type="text" name="email" id="email" placeholder="Username or Email" formControlName="email"/>
+
+      </div>
+
+      <div class="form-field">
+        <div class="field-label-row">
+          <label for="password">Password</label>
+          <a href="/forgot-password">Forgot password?</a>
+        </div>
+        <input type="password" id="password" name="password-input" placeholder="Password" formControlName="password"/>
+      </div>
+
+      <button class="submit-button" type="submit" [disabled]="signInFormGroup.invalid">
+        Sign in <span aria-hidden="true">→</span>
+      </button>
+    </form>
+
+    <p class="sign-up-prompt">New to Postwell? <a href="/register">Create an account</a></p>
+  </section>
+
+  <p class="page-note"><span aria-hidden="true">✦</span> A little more calm for your inbox.</p>
+</main>
