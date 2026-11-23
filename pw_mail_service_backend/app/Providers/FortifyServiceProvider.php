@@ -53,7 +53,7 @@ class FortifyServiceProvider extends ServiceProvider
                 ($credentialId ?: $request->session()->getId()).'|'.$request->ip()
             );
         });
-
+/*
         Fortify::loginView(function() {
             return view("authentication.login");
         });
@@ -62,14 +62,19 @@ class FortifyServiceProvider extends ServiceProvider
             return view("authentication.register");
         });
 
-        Fortify::verifyEmailView(function() {
-            return view("authentication.verify-email");
+        Fortify::requestPasswordResetLinkView(function () {
+            return view("authentication.forgot-password");
         });
 
+        Fortify::verifyEmailView(function() {
+            return view("authentication.verify-email");
+        }); */
+
         Fortify::resetPasswordView(function(Request $request) {
+
             $token = $request->segment(2);
             $email = $request->query("email");
-            return redirect()->away("http://localhost:4200/?token=".$token."&email=".$email);
+            return redirect()->away("http://localhost:4200/change-password?token=".$token."&email=".$email);
         });
 
     }

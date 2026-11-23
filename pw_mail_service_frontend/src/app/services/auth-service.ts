@@ -1,7 +1,7 @@
 import {Injectable, signal, WritableSignal} from "@angular/core"
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http"
 import { switchMap } from "rxjs"
-import { Signup_payload } from "../../types/types"
+import { Signup_payload, ChangePasswordPayload } from "../../types/types"
 
 @Injectable({
   providedIn: "root"
@@ -58,6 +58,19 @@ export class AuthService {
     }
 
     return this.http.get("http://localhost:8000/csrf-cookie").pipe(switchMap(() => this.http.post("http://localhost:8000/forgot-password", body, {
+      observe: "response",
+      headers,
+      withCredentials: true
+    })))
+  }
+
+  changePassword(payload: ChangePasswordPayload) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    })
+
+    return this.http.get("http://localhost:8000/csrf-cookie").pipe(switchMap(() => this.http.post("http://localhost:8000/reset-password",
+      payload, {
       observe: "response",
       headers,
       withCredentials: true

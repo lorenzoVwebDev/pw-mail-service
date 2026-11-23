@@ -13,9 +13,8 @@ Route::get('/csrf-cookie', function () {
     return ;
 });
 
-/*     return redirect()->away('http://localhost:4200/login'); */
 
-/* Route::middleware(['auth', 'verified'])->get('/home', function () {
-       return view("home");
 
-})->name('home'); */
+Route::middleware(['auth', 'verified'])->get('/home', function () {
+    return redirect()->away('http://localhost:4200/login');
+})->name('home');

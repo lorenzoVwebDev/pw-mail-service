@@ -19,7 +19,7 @@ export class SignIn {
 
   constructor(public router: Router) {}
   signInFormGroup: FormGroup = new FormGroup({
-    email: new FormControl("user_1@example.com", [Validators.pattern(this.emailPattern), Validators.required]),
+    email: new FormControl("lorenzo.viganego@libero.it", [Validators.pattern(this.emailPattern), Validators.required]),
     password: new FormControl("Password$1", [Validators.pattern(this.passwordPattern), Validators.required])
   })
 
