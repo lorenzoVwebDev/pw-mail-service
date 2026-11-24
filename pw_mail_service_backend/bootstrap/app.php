@@ -13,9 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-            $middleware->preventRequestForgery(except: [
-        '/*',
-    ]);
+        $middleware->preventRequestForgery(except: [
+            '/*',
+        ]);
+
+        $middleware->redirectGuestsTo(fn (Request $request) => env("FRONTEND_URL")."/login");
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
