@@ -15,7 +15,8 @@ export class SignIn {
   private AuthService = inject(AuthService);
   readonly emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   readonly passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])\S{8,}$/;
-  signedIn: WritableSignal<boolean> = signal<boolean>(false)
+  signedIn: WritableSignal<boolean> = signal<boolean>(false);
+  wrongCredentials: WritableSignal<boolean> = signal<boolean>(false)
 
   constructor(public router: Router) {}
   signInFormGroup: FormGroup = new FormGroup({
@@ -31,10 +32,16 @@ export class SignIn {
       this.AuthService.signIn(email, password).subscribe((res) => {
             if (res) {
               this.signedIn.set(true)
+              this.wrongCredentials.set(false);
               this.router.navigate(["/"])
             }
       }, (err: HttpErrorResponse) => {
-
+          switch (err.status) {
+            case 422: {
+              this.wrongCredentials.set(true);
+              break;
+            }
+          }
       })
     }
   }
